@@ -1,0 +1,7 @@
+LOGIN_URL = "https://stellarburgers.nomoreparties.site/login"
+FORGOT_PASSWORD_URL = "https://stellarburgers.nomoreparties.site/forgot-password"
+RESET_PASSWORD_URL = "https://stellarburgers.nomoreparties.site/reset-password"
+PERSONAL_CABINET_PROFILE_URL = "https://stellarburgers.nomoreparties.site/account/profile"
+PERSONAL_CABINET_HISTORY_URL = "https://stellarburgers.nomoreparties.site/account/order-history"
+MAIN_PAGE_CONSTRUCTOR_URL = "https://stellarburgers.nomoreparties.site/"
+ORDERS_PAGE_URL = "https://stellarburgers.nomoreparties.site/feed"
