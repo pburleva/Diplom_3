@@ -1,8 +1,6 @@
 import allure
 from pages.login_page import LoginPage
 from pages.main_page import MainPage
-from locators.orders_page_locators import OrdersPageLocators
-from locators.main_page_locators import MainPageLocators
 import urls
 import data
 
@@ -18,7 +16,7 @@ class TestMainFunctionality:
         main_page = MainPage(driver)
         main_page.personal_cabinet_tab_click()
         main_page.constructor_tab_click()
-        main_page.wait_element_is_clickable(MainPageLocators.order_button)
+        main_page.wait_order_button_is_clickable()
         assert main_page.get_current_url() == urls.MAIN_PAGE_CONSTRUCTOR_URL
 
     @allure.title('Проверка перехода на страницу Лента заказов')
@@ -28,10 +26,10 @@ class TestMainFunctionality:
         login_page = LoginPage(driver)
         login_page.open_page(urls.LOGIN_URL)
         login_page.login_by_user_successful(data.EXISTING_USER, data.PASSWORD_OF_EXISTING_USER)
-        login_page.wait_element_is_clickable(MainPageLocators.order_button)
         main_page = MainPage(driver)
+        main_page.wait_order_button_is_clickable()
         main_page.orders_tab_click()
-        main_page.wait_element_is_clickable(OrdersPageLocators.orders_header)
+        main_page.wait_orders_tab_is_clickable()
         assert main_page.get_current_url() == urls.ORDERS_PAGE_URL
 
     @allure.title('При клике на ингридиент появится всплывающее окно с деталями')
@@ -40,11 +38,11 @@ class TestMainFunctionality:
         login_page = LoginPage(driver)
         login_page.open_page(urls.LOGIN_URL)
         login_page.login_by_user_successful(data.EXISTING_USER, data.PASSWORD_OF_EXISTING_USER)
-        login_page.wait_element_is_clickable(MainPageLocators.order_button)
         main_page = MainPage(driver)
+        main_page.wait_order_button_is_clickable()
         main_page.ingredient_click()
-        main_page.wait_element_is_clickable(MainPageLocators.ingredient_details_popup_text)
-        assert main_page.find_element(MainPageLocators.ingredient_details_popup_text)
+        main_page.wait_ingredient_details_popup_is_clickable()
+        assert main_page.find_ingredient_details_popup()
 
     @allure.title('При клике на крестик всплывающее окно с деталями закрывается')
     @allure.description('Проверяем что закрывается попап при клике на крестик')
@@ -52,12 +50,12 @@ class TestMainFunctionality:
         login_page = LoginPage(driver)
         login_page.open_page(urls.LOGIN_URL)
         login_page.login_by_user_successful(data.EXISTING_USER, data.PASSWORD_OF_EXISTING_USER)
-        login_page.wait_element_is_clickable(MainPageLocators.order_button)
         main_page = MainPage(driver)
+        main_page.wait_order_button_is_clickable()
         main_page.ingredient_click()
-        main_page.wait_element_is_clickable(MainPageLocators.ingredient_details_popup_text)
+        main_page.wait_ingredient_details_popup_is_clickable()
         main_page.ingredient_popup_cross_button_click()
-        assert main_page.find_element(MainPageLocators.create_burger_header)
+        assert main_page.find_create_burger_title()
 
     @allure.title('При добавлении ингридиента счетчик увеличивается')
     @allure.description('Проверяем что закрывается попап при клике на крестик')
@@ -65,8 +63,8 @@ class TestMainFunctionality:
         login_page = LoginPage(driver)
         login_page.open_page(urls.LOGIN_URL)
         login_page.login_by_user_successful(data.EXISTING_USER, data.PASSWORD_OF_EXISTING_USER)
-        login_page.wait_element_is_clickable(MainPageLocators.order_button)
         main_page = MainPage(driver)
+        main_page.wait_order_button_is_clickable()
         main_page.add_some_ingredients(driver, count)
         result = main_page.get_ingredients_count()
         assert result == str(count)
@@ -77,10 +75,10 @@ class TestMainFunctionality:
         login_page = LoginPage(driver)
         login_page.open_page(urls.LOGIN_URL)
         login_page.login_by_user_successful(data.EXISTING_USER, data.PASSWORD_OF_EXISTING_USER)
-        login_page.wait_element_is_clickable(MainPageLocators.order_button)
         main_page = MainPage(driver)
+        main_page.wait_order_button_is_clickable()
         main_page.add_bun(driver)
         main_page.add_ingredient(driver)
         main_page.create_order_button_click()
-        main_page.wait_element_is_visible(MainPageLocators.order_preparation_is_started)
-        assert main_page.find_element(MainPageLocators.order_preparation_is_started)
+        main_page.wait_order_popup_text_order_started_to_cook_is_visible()
+        assert main_page.find_order_popup_text_order_started_to_cook()

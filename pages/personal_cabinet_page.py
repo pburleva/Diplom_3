@@ -23,3 +23,7 @@ class PersonalCabinetPage(BasePage):
     def logout_item_click(self):
         self.wait_element_is_clickable(PersonalCabinetPageLocators.logout)
         self.click_element(PersonalCabinetPageLocators.logout)
+
+    @allure.step('Ожидаем пока текст Профиль будет видим')
+    def wait_profile_is_visible(self):
+        self.wait_element_is_visible(PersonalCabinetPageLocators.profile)

@@ -1,12 +1,7 @@
 import allure
 from pages.login_page import LoginPage
 from pages.orders_page import OrdersPage
-from pages.personal_cabinet_page import PersonalCabinetPage
 from pages.main_page import MainPage
-from locators.login_locators import LoginPageLocators
-from locators.main_page_locators import MainPageLocators
-from locators.orders_page_locators import OrdersPageLocators
-from locators.personal_cabinet_locators import PersonalCabinetPageLocators
 import urls
 import data
 
@@ -18,12 +13,12 @@ class TestOrders:
         login_page = LoginPage(driver)
         login_page.open_page(urls.LOGIN_URL)
         login_page.login_by_user_successful(data.EXISTING_USER, data.PASSWORD_OF_EXISTING_USER)
-        login_page.wait_element_is_clickable(MainPageLocators.order_button)
         main_page = MainPage(driver)
+        main_page.wait_order_button_is_clickable()
         main_page.orders_tab_click()
         orders_page = OrdersPage(driver)
         orders_page.last_order_card_click()
-        assert main_page.find_element(OrdersPageLocators.order_popup)
+        assert main_page.find_order_popup()
 
     @allure.title('Заказы пользователя отображаются на странице Лента заказов')
     @allure.description('заказы пользователя из раздела История заказов отображаются на странице Лента заказов')
@@ -31,8 +26,8 @@ class TestOrders:
         login_page = LoginPage(driver)
         login_page.open_page(urls.LOGIN_URL)
         login_page.login_by_user_successful(data.EXISTING_USER, data.PASSWORD_OF_EXISTING_USER)
-        login_page.wait_element_is_clickable(MainPageLocators.order_button)
         main_page = MainPage(driver)
+        main_page.wait_order_button_is_clickable()
         order_number = main_page.create_burger(driver)
         orders_page = OrdersPage(driver)
         orders_done = orders_page.get_orders_done()
@@ -44,8 +39,8 @@ class TestOrders:
         login_page = LoginPage(driver)
         login_page.open_page(urls.LOGIN_URL)
         login_page.login_by_user_successful(data.EXISTING_USER, data.PASSWORD_OF_EXISTING_USER)
-        login_page.wait_element_is_clickable(MainPageLocators.order_button)
         main_page = MainPage(driver)
+        main_page.wait_order_button_is_clickable()
         main_page.orders_tab_click()
         orders_page = OrdersPage(driver)
         all_orders_count = orders_page.get_all_orders_count()
@@ -61,8 +56,8 @@ class TestOrders:
         login_page = LoginPage(driver)
         login_page.open_page(urls.LOGIN_URL)
         login_page.login_by_user_successful(data.EXISTING_USER, data.PASSWORD_OF_EXISTING_USER)
-        login_page.wait_element_is_clickable(MainPageLocators.order_button)
         main_page = MainPage(driver)
+        main_page.wait_order_button_is_clickable()
         main_page.orders_tab_click()
         orders_page = OrdersPage(driver)
         today_orders_count = orders_page.get_today_orders_count()
@@ -78,8 +73,8 @@ class TestOrders:
         login_page = LoginPage(driver)
         login_page.open_page(urls.LOGIN_URL)
         login_page.login_by_user_successful(data.EXISTING_USER, data.PASSWORD_OF_EXISTING_USER)
-        login_page.wait_element_is_clickable(MainPageLocators.order_button)
         main_page = MainPage(driver)
+        main_page.wait_order_button_is_clickable()
         order_number = main_page.create_burger(driver)
         main_page.orders_tab_click()
         orders_page = OrdersPage(driver)

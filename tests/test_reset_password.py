@@ -1,10 +1,7 @@
 import allure
-
 import data
 from pages.reset_password_page import ResetPasswordPage
 from pages.login_page import LoginPage
-from locators.login_locators import LoginPageLocators
-from locators.reset_password_locators import ResetPasswordPageLocators
 import urls
 
 
@@ -27,7 +24,7 @@ class TestResetPassword:
         reset_password_page.open_page(urls.FORGOT_PASSWORD_URL)
         reset_password_page.fill_email_field(data.EXISTING_USER)
         reset_password_page.reset_password_button_click()
-        reset_password_page.wait_element_is_clickable(ResetPasswordPageLocators.save_button)
+        reset_password_page.wait_save_button_clickable()
         assert reset_password_page.get_current_url() == urls.RESET_PASSWORD_URL
 
     @allure.title('клик по кнопке показать пароль делает поле активным — подсвечивает его')

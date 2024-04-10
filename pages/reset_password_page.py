@@ -29,3 +29,7 @@ class ResetPasswordPage(BasePage):
     def eye_icon_click(self):
         self.wait_element_is_clickable(ResetPasswordPageLocators.eye_button)
         self.click_element(ResetPasswordPageLocators.eye_button)
+
+    @allure.step('Ожидаем пока кнопка "Сохранить" будет кликабельна')
+    def wait_save_button_clickable(self):
+        self.wait_element_is_clickable(ResetPasswordPageLocators.save_button)

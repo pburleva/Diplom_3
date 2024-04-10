@@ -1,8 +1,6 @@
 import allure
 from pages.login_page import LoginPage
 from pages.personal_cabinet_page import PersonalCabinetPage
-from locators.login_locators import LoginPageLocators
-from locators.personal_cabinet_locators import PersonalCabinetPageLocators
 import urls
 import data
 
@@ -18,7 +16,7 @@ class TestPersonalCabinet:
         login_page.login_by_user_successful(data.EXISTING_USER, data.PASSWORD_OF_EXISTING_USER)
         personal_cabinet_page = PersonalCabinetPage(driver)
         personal_cabinet_page.personal_cabinet_tab_click()
-        personal_cabinet_page.wait_element_is_clickable(PersonalCabinetPageLocators.profile)
+        personal_cabinet_page.wait_profile_is_visible()
         assert personal_cabinet_page.get_current_url() == urls.PERSONAL_CABINET_PROFILE_URL
 
     @allure.title('Проверка перехода на страницу История заказов')
@@ -43,5 +41,5 @@ class TestPersonalCabinet:
         personal_cabinet_page = PersonalCabinetPage(driver)
         personal_cabinet_page.personal_cabinet_tab_click()
         personal_cabinet_page.logout_item_click()
-        login_page.wait_element_is_clickable(LoginPageLocators.login_button)
+        login_page.wait_login_button_clickable()
         assert personal_cabinet_page.get_current_url() == urls.LOGIN_URL

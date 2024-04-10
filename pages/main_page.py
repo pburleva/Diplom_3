@@ -79,3 +79,35 @@ class MainPage(BasePage):
         order_number = self.get_order_number()
         self.ingredient_popup_cross_button_click()
         return order_number
+
+    @allure.step('Ожидаем пока кнопка Order будет кликабельна')
+    def wait_order_button_is_clickable(self):
+        self.wait_element_is_clickable(MainPageLocators.order_button)
+
+    @allure.step('Ожидаем пока вкладка "Лента Заказов" будет кликабельна')
+    def wait_orders_tab_is_clickable(self):
+        self.wait_element_is_clickable(MainPageLocators.orders_tab)
+
+    @allure.step('Ожидаем пока попап с деталями ингридиентов будет кликабелен')
+    def wait_ingredient_details_popup_is_clickable(self):
+        self.wait_element_is_clickable(MainPageLocators.ingredient_details_popup_text)
+
+    @allure.step('Находим попап с деталями ингридиентов')
+    def find_ingredient_details_popup(self):
+        return self.find_element(MainPageLocators.ingredient_details_popup_text)
+
+    @allure.step('Находим заголовок "Соберите бургер"')
+    def find_create_burger_title(self):
+        return self.find_element(MainPageLocators.create_burger_header)
+
+    @allure.step('Находим попап "Ваш заказ начали готовить"')
+    def find_order_popup(self):
+        return self.find_element(MainPageLocators.order_popup)
+
+    @allure.step('Находим текст "Ваш заказ начали готовить"')
+    def find_order_popup_text_order_started_to_cook(self):
+        return self.find_element(MainPageLocators.order_preparation_is_started)
+
+    @allure.step('Ожидаем текст "Ваш заказ начали готовить"')
+    def wait_order_popup_text_order_started_to_cook_is_visible(self):
+        self.wait_element_is_visible(MainPageLocators.order_preparation_is_started)
