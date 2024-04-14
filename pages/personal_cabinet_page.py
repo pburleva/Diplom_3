@@ -9,11 +9,6 @@ class PersonalCabinetPage(BasePage):
     def __init__(self, driver):
         super().__init__(driver)
 
-    @allure.step('Кликаем вкладку Личный кабинет')
-    def personal_cabinet_tab_click(self):
-        self.wait_element_is_clickable(MainPageLocators.personal_cabinet_tab)
-        self.click_element(MainPageLocators.personal_cabinet_tab)
-
     @allure.step('Кликаем пункт История заказов')
     def history_item_click(self):
         self.wait_element_is_clickable(PersonalCabinetPageLocators.history)
